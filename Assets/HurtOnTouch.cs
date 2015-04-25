@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class HurtPlayer : MonoBehaviour {
+public class HurtOnTouch : MonoBehaviour {
 
-	public float knockback = 3.0f;
+	public float knockback = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -26,5 +26,16 @@ public class HurtPlayer : MonoBehaviour {
 			playerBody.AddForce(direction*knockback, ForceMode2D.Impulse);
 		}
 
+		if (collision.gameObject.tag == "Enemy") {
+			GameObject player = collision.gameObject;
+			if(player.GetComponent<EnemyController>().GetVulnerableTime()>0){
+				player.GetComponent<EnemyController>().Damage();
+				
+				Vector2 direction = (player.transform.position-transform.position).normalized;
+				Rigidbody2D playerBody = player.GetComponent<Rigidbody2D>();
+				playerBody.velocity = new Vector2(0,0);
+				playerBody.AddForce(direction*knockback, ForceMode2D.Impulse);
+			}
+		}
 	}
 }

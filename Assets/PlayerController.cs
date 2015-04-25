@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
 	float flickerTime = 0.0f;
 	int frames = 5;
+	bool clicked = false;
 
 	public GameObject airPulse;
 
@@ -23,6 +24,12 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(clicked){
+			airPulse.GetComponent<PushThings> ().PushEnemies();
+			clicked=false;
+		}
+
+
 		air += (airMultiplier * Time.deltaTime);
 		if (air > airMax) {
 			air = airMax;
@@ -40,28 +47,36 @@ public class PlayerController : MonoBehaviour {
 			airPulse.transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
 
 			if(air >= 1.0f && counter <= 0.0f){
-			playerBody.AddForce(direction*speed, ForceMode2D.Impulse);
-			air -= 1.0f;
-			counter = cooldown;
+				playerBody.AddForce(direction*speed, ForceMode2D.Impulse);
+				air -= 1.0f;
+				counter = cooldown;
+				clicked=true;
 			}
+
 		}
 
 		float screenX = Screen.width;
 		float screenY = Screen.height;
+		float offset = 40;
+		float offRight = screenX - offset;
+		float offLeft = offset;
+		float offTop = screenY - offset;
+		float offBottom = offset;
 		Vector2 playerPosScreen = Camera.main.WorldToScreenPoint(playerPosition);
 
-		if(playerPosScreen.x > screenX ){
+		if(playerPosScreen.x > offRight ){
 			playerBody.velocity = new Vector2(-Mathf.Abs(playerBody.velocity.x), playerBody.velocity.y);
 		}
-		else if (playerPosScreen.x < 0){
+		else if (playerPosScreen.x < offLeft){
 			playerBody.velocity = new Vector2(Mathf.Abs(playerBody.velocity.x), playerBody.velocity.y);
 		}
 
-		if(playerPosScreen.y> screenY ){
+		if(playerPosScreen.y> offTop ){
 			playerBody.velocity = new Vector2(playerBody.velocity.x, -Mathf.Abs(playerBody.velocity.y));
 		}
-		else if (playerPosScreen.y < 0){
-			playerBody.velocity = new Vector2(playerBody.velocity.x, Mathf.Abs(playerBody.velocity.y));
+		else if (playerPosScreen.y < offBottom){
+			GameOver();
+			//playerBody.velocity = new Vector2(playerBody.velocity.x, Mathf.Abs(playerBody.velocity.y));
 		}
 
 		Flicker ();
@@ -89,5 +104,9 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<SpriteRenderer> ().enabled = true;
 			airPulse.GetComponent<SpriteRenderer> ().enabled = true;
 		}
+	}
+
+	void GameOver(){
+		Debug.Log("Has perdido");
 	}
 }
