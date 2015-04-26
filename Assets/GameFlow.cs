@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StartGame : MonoBehaviour {
+public class GameFlow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+	
 	}
 	
 	// Update is called once per frame
@@ -12,8 +13,7 @@ public class StartGame : MonoBehaviour {
 	
 	}
 
-	public void LoadLevel1()
-	{
-		Application.LoadLevel ("Nivel 1");
+	public void LoseGame(){
+		Application.LoadLevel ("GameOver");
 	}
 }

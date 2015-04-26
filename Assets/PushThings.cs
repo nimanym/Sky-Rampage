@@ -27,7 +27,7 @@ public class PushThings : MonoBehaviour {
 
 	public void PushEnemies(){
 		foreach (GameObject enemy in colliders) {
-			if(enemy.CompareTag("Enemy")){
+			if(enemy!=null && enemy.CompareTag("Enemy")){
 
 				Vector2 distance = enemy.transform.position-transform.position;
 				Vector2 direction = distance.normalized;
@@ -40,6 +40,18 @@ public class PushThings : MonoBehaviour {
 	}
 
 	public void PushPlayer(){
-		
+		foreach (GameObject enemy in colliders) {
+			if(enemy.CompareTag("Player")){
+				
+				Vector2 distance = enemy.transform.position-transform.position;
+				Vector2 direction = distance.normalized;
+				
+				enemy.GetComponent<Rigidbody2D>().AddForce(direction*pushForce, ForceMode2D.Impulse);
+			}
+		}
+	}
+
+	public List<GameObject> getColliders(){
+		return colliders;
 	}
 }
