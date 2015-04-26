@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour {
 
 		float screenX = Screen.width;
 		float screenY = Screen.height;
-		float offset = 40;
+		float offset = 0;
 		float offRight = screenX - offset;
 		float offLeft = offset;
 		float offTop = screenY - offset;
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour {
 		if(playerPosScreen.y> offTop ){
 			playerBody.velocity = new Vector2(playerBody.velocity.x, -Mathf.Abs(playerBody.velocity.y));
 		}
-		else if (playerPosScreen.y < -offBottom){
+		else if (playerPosScreen.y < -20){
 			if(health <= 0 || vulnerableTime >0){
 				Die();
 			}

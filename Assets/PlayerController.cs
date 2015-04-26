@@ -57,7 +57,9 @@ public class PlayerController : MonoBehaviour {
 
 		float screenX = Screen.width;
 		float screenY = Screen.height;
-		float offset = 40;
+		//float offset = 40;
+		float offset = 0;//GetComponent<SpriteRenderer> ().bounds.size.y;
+		//Debug.Log (offset);
 		float offRight = screenX - offset;
 		float offLeft = offset;
 		float offTop = screenY - offset;
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 		if(playerPosScreen.y> offTop ){
 			playerBody.velocity = new Vector2(playerBody.velocity.x, -Mathf.Abs(playerBody.velocity.y));
 		}
-		else if (playerPosScreen.y < offBottom){
+		else if (playerPosScreen.y < -60){
 			GameOver();
 			//playerBody.velocity = new Vector2(playerBody.velocity.x, Mathf.Abs(playerBody.velocity.y));
 		}
@@ -110,4 +112,10 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log("Has perdido");
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<GameFlow> ().LoseGame ();
 	}
+	/*
+	void onGUI(){
+		GUI.DrawTexture(Rect(pos.x, pos.y, size.x, size.y), progressBarEmpty);
+		GUI.DrawTexture(Rect(pos.x, pos.y, size.x * Mathf.Clamp01(progress), size.y), progressBarFull);
+	}
+	*/
 }
