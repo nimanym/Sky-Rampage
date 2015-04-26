@@ -4,7 +4,6 @@ using System.Collections;
 public class EnemyController : MonoBehaviour {
 
 	GameObject player;
-	public GameObject airPulse;
 
 	public float moveSpeed = 2.0f;
 	public int health = 1;

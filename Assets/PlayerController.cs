@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void GameOver(){
-		Debug.Log("Has perdido");
+		//Debug.Log("Has perdido");
+		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<GameFlow> ().LoseGame ();
 	}
 }

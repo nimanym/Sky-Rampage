@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StartGame : MonoBehaviour {
+public class GoToMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,8 +12,8 @@ public class StartGame : MonoBehaviour {
 	
 	}
 
-	public void LoadLevel1()
+	public void LoadMenuScene()
 	{
-		Application.LoadLevel ("Nivel 1");
+		Application.LoadLevel ("Main Menu");
 	}
 }
