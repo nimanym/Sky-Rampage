@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject airPulse;
 
+	public Texture2D healthBarEmpty;
+	public Texture2D healthBarFull;
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		if(clicked){
 			airPulse.GetComponent<PushThings> ().PushEnemies();
 			clicked=false;
@@ -112,10 +116,24 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log("Has perdido");
 		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<GameFlow> ().LoseGame ();
 	}
-	/*
-	void onGUI(){
-		GUI.DrawTexture(Rect(pos.x, pos.y, size.x, size.y), progressBarEmpty);
-		GUI.DrawTexture(Rect(pos.x, pos.y, size.x * Mathf.Clamp01(progress), size.y), progressBarFull);
+
+	void OnGUI(){
+		float progress = air / airMax;
+		Debug.Log (progress);
+		Vector2 pos = new Vector2 (10, 10);
+		int width = Screen.width*healthBarEmpty.width/1500;
+		int height = Screen.width*healthBarEmpty.height/1500;
+
+		GUI.DrawTexture(new Rect(pos.x, pos.y, width, height), healthBarEmpty);
+		GUI.DrawTexture(new Rect(pos.x, pos.y, (width * Mathf.Clamp01(progress)), height), healthBarFull);
+
+
+
+		/*GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), healthBarEmpty);
+		GUI.BeginGroup(new Rect(0,0, size.x * progress, size.y));
+		GUI.Box(new Rect(0,0, size.x, size.y), healthBarFull);
+		GUI.EndGroup();
+		GUI.EndGroup();*/
 	}
-	*/
 }
