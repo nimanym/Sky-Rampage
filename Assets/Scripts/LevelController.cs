@@ -6,7 +6,10 @@ public class LevelController : MonoBehaviour {
 	public int lastLevel = 0;
 
 	void Awake() {
-		DontDestroyOnLoad(transform.gameObject);
+		if (GameObject.FindGameObjectsWithTag ("LevelControl").Length > 1) {
+			Destroy (gameObject);
+		}
+		else DontDestroyOnLoad(transform.gameObject);
 	}
 
 	// Use this for initialization

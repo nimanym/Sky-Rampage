@@ -102,10 +102,11 @@ public class EnemyController : MonoBehaviour {
 
 		foreach (GameObject obstacleI in obstaclesArray) {
 			Vector2 obsPos = obstacleI.transform.position;
+			float myVel = GetComponent<Rigidbody2D>().velocity.magnitude;
 			float dist = Mathf.Abs((obsPos - position).magnitude);
-			if (dist<1.5f){
+			if (dist<2.5f){
 				Vector2 dir = -(obsPos - position).normalized;
-				playerBody.AddForce(dir*3*Mathf.Pow((1.8f-dist), 3.0f));
+				playerBody.AddForce(dir*3*(0.3f*myVel)*(Mathf.Pow((3.0f-dist), 3.0f)));
 			}
 		}
 

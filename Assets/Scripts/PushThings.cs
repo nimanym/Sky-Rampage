@@ -7,6 +7,7 @@ public class PushThings : MonoBehaviour {
 	List<GameObject> colliders;
 
 	public float pushForce = 10.0f;
+	float counter = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +16,11 @@ public class PushThings : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (counter > 0) {
+			GetComponentInChildren<ParticleSystem> ().enableEmission = true;
+			counter -= Time.deltaTime;
+		} else
+			GetComponentInChildren<ParticleSystem> ().enableEmission = false;
 	}
 
 	void OnTriggerEnter2D (Collider2D other){
@@ -26,6 +32,7 @@ public class PushThings : MonoBehaviour {
 	}
 
 	public void PushEnemies(){
+		counter = 0.1f;
 		foreach (GameObject enemy in colliders) {
 			if(enemy!=null && enemy.CompareTag("Enemy")){
 
@@ -40,6 +47,7 @@ public class PushThings : MonoBehaviour {
 	}
 
 	public void PushPlayer(){
+		counter = 0.1f;
 		foreach (GameObject enemy in colliders) {
 			if(enemy.CompareTag("Player")){
 				

@@ -16,6 +16,11 @@ public class GoToMenu : MonoBehaviour {
 	{
 		Application.LoadLevel(GameObject.Find("LevelControl").GetComponent<LevelController>().lastLevel);
 	}
+
+	public void LoadNextLevel()
+	{
+		Application.LoadLevel(GameObject.Find("LevelControl").GetComponent<LevelController>().lastLevel+1);
+	}
 	
 	public void LoadMenuScene()
 	{

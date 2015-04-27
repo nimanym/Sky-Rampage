@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 		Rigidbody2D playerBody = GetComponent<Rigidbody2D>();
 		Vector2 playerPosition = transform.position;
 
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButton (0) && health > 0) {
 			Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 direction = (playerPosition-mousePosition).normalized;
 			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
