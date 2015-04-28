@@ -59,6 +59,12 @@ public class EnemyController : MonoBehaviour {
 		Vector2 position = transform.position;
 		Vector2 distance = player.transform.position - transform.position;
 		Vector2 direction = distance.normalized;
+
+		if (direction.x > 0) {
+			transform.localScale= new Vector3(3,3,5);
+		} else if (direction.x < 0) {
+			transform.localScale= new Vector3(-3,3,5);
+		}
 		Vector2 auxDirection;
 
 		Debug.DrawRay (transform.position, distance);

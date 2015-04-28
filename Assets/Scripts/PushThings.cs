@@ -41,7 +41,7 @@ public class PushThings : MonoBehaviour {
 				float speed = pushForce/distance.magnitude;
 
 				enemy.GetComponent<Rigidbody2D>().AddForce(direction*speed, ForceMode2D.Impulse);
-				enemy.GetComponent<EnemyController>().SetVulnerable(1.0f);
+				enemy.GetComponent<EnemyController>().SetVulnerable((direction*speed).magnitude/3);
 			}
 		}
 	}

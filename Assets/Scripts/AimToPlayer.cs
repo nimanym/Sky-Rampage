@@ -20,8 +20,13 @@ public class AimToPlayer : MonoBehaviour {
 		Vector2 myPosition = transform.position;
 		Vector2 direction = (myPosition-playerPosition).normalized;
 		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+		angle -= 90;
+		Debug.Log (angle);
+		if (direction.x > 0) {
+			angle=Mathf.Abs(angle);
+		}
 
-		airPulse.transform.rotation = Quaternion.Lerp(airPulse.transform.rotation, Quaternion.AngleAxis(angle-90, Vector3.forward), 0.03f);
+		airPulse.transform.rotation = Quaternion.Lerp(airPulse.transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), 0.03f);
 		if (cool <= 0) {
 			PushThings pusher = airPulse.GetComponent<PushThings> ();
 			List<GameObject> colliders = pusher.getColliders ();

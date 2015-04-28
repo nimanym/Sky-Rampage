@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour {
 	public Texture2D healthBarEmpty;
 	public Texture2D healthBarFull;
 
+	public GameObject balloon1;
+	public GameObject balloon2;
+	public GameObject balloon3;
+
 	// Use this for initialization
 	void Start () {
 
@@ -27,6 +31,29 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		switch (health) {
+		case 0:
+			balloon1.SetActive(false);
+			balloon2.SetActive(false);
+			balloon3.SetActive(false);
+			break;
+		case 1:
+			balloon1.SetActive(true);
+			balloon2.SetActive(false);
+			balloon3.SetActive(false);
+			break;
+		case 2:
+			balloon1.SetActive(true);
+			balloon2.SetActive(true);
+			balloon3.SetActive(false);
+			break;
+		case 3:
+			balloon1.SetActive(true);
+			balloon2.SetActive(true);
+			balloon3.SetActive(true);
+			break;
+		}
 
 		if(clicked){
 			airPulse.GetComponent<PushThings> ().PushEnemies();
@@ -86,7 +113,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		Flicker ();
-		playerBody.gravityScale = 1 - health * 0.2f;
+		playerBody.gravityScale = 1 - health * 0.3f;
 	}
 
 	public void Damage(){
@@ -126,14 +153,5 @@ public class PlayerController : MonoBehaviour {
 
 		GUI.DrawTexture(new Rect(pos.x, pos.y, width, height), healthBarEmpty);
 		GUI.DrawTexture(new Rect(pos.x, pos.y, (width * Mathf.Clamp01(progress)), height), healthBarFull);
-
-
-
-		/*GUI.BeginGroup(new Rect(pos.x, pos.y, size.x, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), healthBarEmpty);
-		GUI.BeginGroup(new Rect(0,0, size.x * progress, size.y));
-		GUI.Box(new Rect(0,0, size.x, size.y), healthBarFull);
-		GUI.EndGroup();
-		GUI.EndGroup();*/
 	}
 }
